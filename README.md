@@ -21,8 +21,26 @@ Guide for writing change logs.
 `Fixed`  for any bug fixes.
 
 
-## 2023-08-10
 
+
+## 2021-08-11
+
+### Added
+- Completed the landing page, it now redirects the user to the home page.
+
+### Changed
+
+
+### Deprecated
+
+
+### Removed
+
+
+### Fixed
+
+
+## 2023-08-10
 
 ### Added
 - Added the base project structure.

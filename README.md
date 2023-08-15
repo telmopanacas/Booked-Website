@@ -28,6 +28,7 @@ Guide for writing change logs.
 - Added the PageLayout component.
 ### Changed
 - Changed the pages structure to externalize the Navbar component.
+- Finalized the About page.
 
 ### Deprecated
 

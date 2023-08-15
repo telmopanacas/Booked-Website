@@ -21,6 +21,21 @@ Guide for writing change logs.
 `Fixed`  for any bug fixes.
 
 
+## 2021-08-15
+
+### Added
+- Added the Navbar component.
+- Added the PageLayout component.
+### Changed
+- Changed the pages structure to externalize the Navbar component.
+
+### Deprecated
+
+
+### Removed
+
+
+### Fixed
 
 
 ## 2021-08-11
@@ -38,24 +53,6 @@ Guide for writing change logs.
 
 
 ### Fixed
-
-
-## 2021-08-15
-
-### Added
-- Added the Navbar component.
-- Added the PageLayout component.
-### Changed
-- Changed the pages structure to externalize the Navbar component.
-
-### Deprecated
-
-
-### Removed
-
-
-### Fixed
-
 
 ## 2023-08-10
 

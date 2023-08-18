@@ -22,6 +22,7 @@
     margin-bottom: 4px;
 }
 .textarea-inside textarea{
+    font-family: 'Roboto';
     height: 250px;
     width: 98%;
     font-size: 17px;

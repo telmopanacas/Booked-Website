@@ -27,10 +27,10 @@ const Rating = ({ setRating }) => {
                     <label>Rating</label>
                     <input 
                         type="number" 
-                        min="0"
+                        min="1"
                         max="5"
                         required
-                        placeholder="0"
+                        placeholder="1"
                         onChange={(e) => setRating(e.target.value)}
                     />
                 </div>

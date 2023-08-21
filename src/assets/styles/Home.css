@@ -1,0 +1,38 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    gap: 80px;
+}
+
+.new-review-btt {
+    height: 42px;
+    width: 160px;
+    border-radius: 4px;
+    color: white;
+    background-color: #34A38F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    cursor: pointer;
+}
+
+.plus-icon {
+    height: 15px;
+    width: 15px;
+    background-image: url('../images/+.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 15px;
+    row-gap: 35px;
+    margin-bottom: 30px;
+}

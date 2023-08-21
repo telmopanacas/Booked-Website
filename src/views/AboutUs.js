@@ -2,7 +2,7 @@ import '../assets/styles/About.css'
 
 const AboutUsPage = () => {
     return ( 
-        <div className="page">
+        <div className="about-page">
             <div className="image-side">
                 <div className="image">
             

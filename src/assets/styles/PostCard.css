@@ -2,7 +2,7 @@
     width: 560px;
     min-height: 280px;
     border-radius: 12px;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     /*padding: top, right, bottom, and left*/
     /* padding: top & bottom and left & right */
     padding: 10px 20px

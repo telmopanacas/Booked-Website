@@ -1,4 +1,8 @@
 import '../assets/styles/PostCard.css'
+import getCurrentTime from '../utils/getCurrentTime.js'
+import getCurrentDate from '../utils/getCurrentDate.js'
+
+
 
 const RatingStars = ({ rating }) => {
     if(rating == 1) {
@@ -76,22 +80,17 @@ const RatingStars = ({ rating }) => {
 }
 
 
-const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review }) => {
+const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, date, time }) => {
     const displayPostTitle = postTitle.trim() !== '' ? postTitle : 'Post title';
     const displayBookTitle = bookTitle.trim() !== '' ? bookTitle : 'Book title';
     const displayBookAuthor= bookAuthor.trim() !== '' ? bookAuthor : 'Book author';
     const displayUsername = username.trim() !== '' ? username : 'Your username';
     const displayReview = review.trim() !== '' ? review : 'Your review.';
 
-    const currentTime = new Date();
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
-    const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-    const day = String(currentTime.getDate()).padStart(2, '0');
-    const month = String(currentTime.getMonth() + 1).padStart(2, '0');
-    const year = currentTime.getFullYear();
-    const formattedDate = `${day}/${month}/${year}`;
+    const displayTime = time === undefined ? getCurrentTime() : time;
+    const displayDate = date === undefined ? getCurrentDate() : date;
 
+    
     return ( 
         <div className="card">
             <div className="card-outside">
@@ -101,14 +100,14 @@ const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review }
                             <h3>{ displayPostTitle }</h3>
                             <p>{ displayBookTitle} - { displayBookAuthor }</p>
                         </div>
-                        <p>{ formattedTime } { hours >= 12 ? 'PM' : 'AM' }</p>
+                        <p>{ displayTime }</p>
                     </div>
                     <RatingStars rating={rating}/>
                     <div className="review" >
                         <p>{ displayReview }</p>
                     </div>
                     <div className="post-author">
-                        <p>By: { displayUsername } <span>{ formattedDate }</span></p>
+                        <p>By: { displayUsername } <span>{ displayDate }</span></p>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,6 @@ import CreateReviewPage from '../views/CreateReview';
 import AboutUsPage from '../views/AboutUs';
 import ContactPage from '../views/Contact';
 import SignInPage from '../views/SignIn';
-import RegisterPage from '../views/Register';
 import NotFoundPage from '../views/404';
 
 const PageLayout = () => {
@@ -19,7 +18,6 @@ const PageLayout = () => {
                     <Route path='/about' element={<AboutUsPage />}/>
                     <Route path='/contact' element={<ContactPage />}/>
                     <Route path='/signin' element={<SignInPage />}/>
-                    <Route path='/register' element={<RegisterPage />}/>
                     <Route path='*' element={<NotFoundPage />}/>
                 </Routes>
             </div>

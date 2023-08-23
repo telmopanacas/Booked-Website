@@ -1,0 +1,77 @@
+.signin-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90vh;
+}
+
+.signin-image {
+    width: 400px;
+    height: 470px;
+    background-image: url('../images/signin.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.signin-form-box {
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    min-height: 530px;
+    width: 500px;
+    
+}
+
+.signin-form-div {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signin-form h1 {
+    margin-top: 10px;
+    color: #343435;
+    font-size: 35px;
+    margin-bottom: 50px;
+}
+
+.signin-form button {
+    margin-top: 50px;
+    padding: 15px 60px;
+    border-radius: 4px;
+    border: 0px;
+    background-color: #34A38F;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.forgot-password {
+    text-align:right;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(52, 163, 143, 0.63);
+}
+
+.forgot-password p {
+    cursor: pointer;
+}
+
+.divider {
+    margin-top: 40px;
+    height: 3px;
+    width: 460px;
+    background-color: #D9D9D9;
+}
+
+.not-member {
+    margin-top: 30px;
+    color: #797979;
+    font-size: 15px;
+}
+
+.create-account {
+    font-weight: bold;
+    color: #34A38F;
+    cursor: pointer;
+}

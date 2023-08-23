@@ -21,7 +21,90 @@ Guide for writing change logs.
 `Fixed`  for any bug fixes.
 
 
-## 2021-08-15
+## 2023-08-23
+
+### Added
+- Added the Sign In and Register forms.
+- Finished the Sign In page.
+- Finished the 404 Page.
+
+### Changed
+- Changed the height of the navbar to 10vh to simplify the layout.
+- Changed the form inputs border color.
+
+### Deprecated
+- N/A.
+
+### Removed
+- Removed the Register.js file, it's now a component to be used in the Sign In page.
+
+### Fixed
+- N/A.
+
+
+## 2023-08-22
+
+### Added
+- Finished the Contact Us page.
+
+### Changed
+- N/A.
+
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
+
+
+## 2023-08-21
+
+### Added
+- Stylized the create new review button in the home page.
+
+- Added the reviews list component. ( For now are static reviews )
+- Added the following util components:
+    - getCurrentDate.js - Returns the current date in the format: `DD/MM/YYYY`.
+    - getCurrentTime.js - Returns the current time in the format: `HH:MM PM/AM`.
+### Changed
+- N/A.
+
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
+
+
+## 2023-08-18
+
+### Added
+- Added the input components for the create review page.
+
+- Added the Review Card component.
+- Finished the Create Review page.
+
+### Changed
+- Changed the website font to Roboto.
+
+### Deprecated
+- N/A.
+
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
+
+
+## 2023-08-15
 
 ### Added
 - Added the Navbar component.
@@ -31,29 +114,32 @@ Guide for writing change logs.
 - Finalized the About page.
 
 ### Deprecated
-
+- N/A.
 
 ### Removed
-
+- N/A.
 
 ### Fixed
+- N/A.
 
 
-## 2021-08-11
+## 2023-08-11
 
 ### Added
 - Completed the landing page, it now redirects the user to the home page.
 
 ### Changed
-
+- N/A.
 
 ### Deprecated
-
+- N/A.
 
 ### Removed
-
+- N/A.
 
 ### Fixed
+- N/A.
+
 
 ## 2023-08-10
 

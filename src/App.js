@@ -6,7 +6,6 @@ import CreateReviewPage from './views/CreateReview';
 import AboutUsPage from './views/AboutUs';
 import ContactPage from './views/Contact';
 import SignInPage from './views/SignIn';
-import RegisterPage from './views/Register';
 import NotFoundPage from './views/404';
 import PageLayout from './components/PageLayout';
 

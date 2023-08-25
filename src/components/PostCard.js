@@ -81,6 +81,7 @@ const RatingStars = ({ rating }) => {
 
 
 const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, date, time }) => {
+    
     const displayPostTitle = postTitle.trim() !== '' ? postTitle : 'Post title';
     const displayBookTitle = bookTitle.trim() !== '' ? bookTitle : 'Book title';
     const displayBookAuthor= bookAuthor.trim() !== '' ? bookAuthor : 'Book author';

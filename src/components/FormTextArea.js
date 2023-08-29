@@ -1,6 +1,6 @@
 import '../assets/styles/FormTextArea.css'
 
-const FormTextArea = ({ label, placeholder, setInput }) => {
+const FormTextArea = ({ label, placeholder, setInput, isRequired }) => {
     return ( 
         <div className="textarea-design">
             <div className="textarea-outside">
@@ -8,7 +8,7 @@ const FormTextArea = ({ label, placeholder, setInput }) => {
                     <label>{label}</label>
                     <textarea 
                         type="text" 
-                        required
+                        required={isRequired ? 'required' : undefined}
                         placeholder={placeholder}
                         onChange={(e) => setInput(e.target.value)}
                     />

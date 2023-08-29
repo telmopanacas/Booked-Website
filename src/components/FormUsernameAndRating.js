@@ -27,6 +27,7 @@ const Rating = ({ setRating }) => {
                     <label>Rating</label>
                     <input 
                         type="number" 
+                        value="1"
                         min="1"
                         max="5"
                         required

@@ -31,6 +31,7 @@ Guide for writing change logs.
     - `createBook` - makes a POST request to the API to create a new book.
 - Added the function `makePOSTReview` to the `ReviewService.js` file that makes a POST request to the API to create a new review.
 - Added the function `createReview` to the `ReviewService.js` file that contains all the logic to create a new review.
+- Integrated the webservice `EmailJS` to send emails from the contact form.
 
 ### Changed
 - Changed the component `FormTextArea` so now the `required` value is passed as a prop.

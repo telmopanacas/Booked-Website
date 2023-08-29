@@ -1,6 +1,8 @@
 import '../assets/styles/FormInput.css'
 
-const FormInput = ({ label, placeholder, setInput}) => {
+const FormInput = ({ label, placeholder, setInput, type, name}) => {
+    const inputType = type || "text";
+    const inputName = name || undefined;
 
     return ( 
         <div className="input-design">
@@ -8,7 +10,8 @@ const FormInput = ({ label, placeholder, setInput}) => {
                 <div className="input-inside">
                     <label>{label}</label>
                     <input 
-                        type="text" 
+                        name={inputName}
+                        type={inputType} 
                         required
                         placeholder={placeholder}
                         onChange={(e) => setInput(e.target.value)}

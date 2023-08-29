@@ -82,11 +82,11 @@ const RatingStars = ({ rating }) => {
 
 const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, date, time }) => {
     
-    const displayPostTitle = postTitle.trim() !== '' ? postTitle : 'Post title';
-    const displayBookTitle = bookTitle.trim() !== '' ? bookTitle : 'Book title';
-    const displayBookAuthor= bookAuthor.trim() !== '' ? bookAuthor : 'Book author';
-    const displayUsername = username.trim() !== '' ? username : 'Your username';
-    const displayReview = review.trim() !== '' ? review : 'Your review.';
+    const displayPostTitle = postTitle !== '' ? postTitle : 'Post title';
+    const displayBookTitle = bookTitle !== '' ? bookTitle : 'Book title';
+    const displayBookAuthor= bookAuthor !== '' ? bookAuthor : 'Book author';
+    const displayUsername = username !== '' ? username : 'Your username';
+    const displayReview = review !== '' ? review : 'Your review.';
 
     const displayTime = time === undefined ? getCurrentTime() : time;
     const displayDate = date === undefined ? getCurrentDate() : date;

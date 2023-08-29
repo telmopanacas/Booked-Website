@@ -20,16 +20,35 @@ Guide for writing change logs.
 
 `Fixed`  for any bug fixes.
 
+## 2023-08-29
+
+### Added
+- Added the function `useGetBookId` the fetches the book data from the API with its title and author.
+
+- Added the function `parseDate` that receives a date and hours string and returns a date object.
+- Added the file `BookService.js` that contains functions who perform API calls related to books and contains the following functions:
+    - `fetchBookId` - fetchs the book data from the API with its title and author.
+    - `createBook` - makes a POST request to the API to create a new book.
+- Added the function `makePOSTReview` to the `ReviewService.js` file that makes a POST request to the API to create a new review.
+- Added the function `createReview` to the `ReviewService.js` file that contains all the logic to create a new review.
+
+### Changed
+- Changed the component `FormTextArea` so now the `required` value is passed as a prop.
+
+- In the `PostCard` component, removed the `.trim()` to the props as it was causing some problems with the API data.
+- In the view `CreateReview`, changed the position of the post button to the side of the form to simplify the verification of the empty fields.
 
 ## 2023-08-23
 
 ### Added
 - Added the Sign In and Register forms.
+
 - Finished the Sign In page.
 - Finished the 404 Page.
 
 ### Changed
 - Changed the height of the navbar to 10vh to simplify the layout.
+
 - Changed the form inputs border color.
 
 ### Deprecated

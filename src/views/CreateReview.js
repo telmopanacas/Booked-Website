@@ -14,7 +14,7 @@ const CreateReviewPage = () => {
     const [bookTitle, setBookTitle] = useState('');
     const [bookAuthor, setBookAuthor] = useState('');
     const [username, setUsername] = useState('');
-    const [rating, setRating] = useState('1');
+    const [rating, setRating] = useState(1);
     const [review, setReview] = useState('');
 
     const handlePostClick = (e) => {
@@ -42,7 +42,7 @@ const CreateReviewPage = () => {
                         <FormInput label="Title" placeholder="Post title" setInput={setPostTitle}/>
                         <FormInput label="Book title" placeholder="Book Title" setInput={setBookTitle}/>
                         <FormInput label="Book author" placeholder="Book Author" setInput={setBookAuthor}/>
-                        <FormUsernameAndRating setUsername={setUsername} setRating={setRating}/>
+                        <FormUsernameAndRating setUsername={setUsername} rating={rating} setRating={setRating}/>
                         <FormTextArea label="Review" placeholder="Write your review." setInput={setReview} isRequired={false}/>
                         <button className="createReview-btn">
                             Post

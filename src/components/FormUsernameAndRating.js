@@ -19,7 +19,7 @@ const Username = ({ setUsername}) => {
     );
 }
 
-const Rating = ({ setRating }) => {
+const Rating = ({ rating, setRating }) => {
     return (
         <div className="rating-design">
             <div className="rating-outside">
@@ -27,7 +27,7 @@ const Rating = ({ setRating }) => {
                     <label>Rating</label>
                     <input 
                         type="number" 
-                        value="1"
+                        value={rating}
                         min="1"
                         max="5"
                         required

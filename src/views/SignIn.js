@@ -1,10 +1,14 @@
-import { Form } from 'react-router-dom';
+import { Form, Navigate } from 'react-router-dom';
 import '../assets/styles/Signin.css';
 import FormInput from '../components/FormInput.js'
 import { useState } from 'react';
 import FormPasswordInput from '../components/FormPasswordInput';
+import { authenticate } from '../services/AuthenticationService';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = ({ setIsAMember }) => {
+    const navigate = new useNavigate();
     const [signInEmail, setSignInEmail] = useState("");
     const [signInPassword, setSignInPassword] = useState("");
 
@@ -12,11 +16,21 @@ const SignInForm = ({ setIsAMember }) => {
         setIsAMember(false);
     }
 
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        authenticate(signInEmail, signInPassword)
+        .then((response => {
+            
+            let token = response['access_token'];
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            navigate("/home");
+        }));
+    }
 
     return (
         <div className="signin-form-box">
             <div className="signin-form-div">
-                <form className='signin-form'>
+                <form className='signin-form' onSubmit={handleSignIn}>
                     <h1>Sign In</h1>
                     <FormInput 
                         label="Email"

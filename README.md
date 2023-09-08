@@ -20,6 +20,36 @@ Guide for writing change logs.
 
 `Fixed`  for any bug fixes.
 
+## 2023-09-08
+
+### Added
+- Added the file `AuthenticationService` with the functions:
+    - authenticate - Makes a POST request to the API to authenticate the user.
+    
+    - register - Makes a POST request to the API to register a new user.
+
+
+- Added the file `axios` where these configurations are set:
+    - The base URL for the API.
+    
+    - The `with credentials` option to allow the cookies to be sent from the API.
+- Still in the file `axios` a interceptor was added to handle the `403 Forbidden` error and make a call to the API to refresh the access token.
+
+- Added the hook `useAllBooks` in the file `useBook` that fetches all the books from the API. 
+
+### Changed
+- In both files `BookService` and `ReviewService` the `fetch` function was replaced by the `axios` function.
+
+- In the file `Signin` implemented the `handleSignIn` function to handle the sign in form submit.
+
+### Deprecated
+
+
+### Removed
+
+
+### Fixed
+
 ## 2023-08-29
 
 ### Added

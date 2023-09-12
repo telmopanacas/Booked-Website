@@ -17,7 +17,6 @@ export const useGetBookId = (bookTitle, bookAuthor) => {
         // The book doesn't exist in the database. And we have to create it first.
         .catch(( err => {
             console.log(err);
-            console.log("yo");
             setIsPending(false);
             setError(err);
         }));

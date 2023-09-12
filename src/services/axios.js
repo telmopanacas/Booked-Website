@@ -9,7 +9,7 @@ axios.interceptors.response.use(response => response, async error => {
     
         refresh = true;
 
-        const response = await axios.post("auth/refresh-token", {}, {withCredentials: true});
+        const response = await axios.post("auth/refresh-token", {});
 
         if( response.status === 200 ) {
             /*

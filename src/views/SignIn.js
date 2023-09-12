@@ -6,8 +6,10 @@ import FormPasswordInput from '../components/FormPasswordInput';
 import { authenticate } from '../services/AuthenticationService';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const SignInForm = ({ setIsAMember }) => {
+    const { setAuth } = useAuth();
     const navigate = new useNavigate();
     const [signInEmail, setSignInEmail] = useState("");
     const [signInPassword, setSignInPassword] = useState("");
@@ -20,9 +22,10 @@ const SignInForm = ({ setIsAMember }) => {
         e.preventDefault();
         authenticate(signInEmail, signInPassword)
         .then((response => {
-            
             let token = response['access_token'];
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            const authenticated = true;
+            setAuth({authenticated})
             navigate("/home");
         }));
     }

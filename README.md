@@ -20,6 +20,85 @@ Guide for writing change logs.
 
 `Fixed`  for any bug fixes.
 
+
+## 2023-09-12
+
+### Added
+- Added the file `AuthProvider` that will surround our application and provide the authentication context to all the components.
+
+
+- Added the file `useAuth` that contains the hook `useAuth` that returns the authentication context.
+
+
+- Added the file `useIsAuthenticated` which contains the hook that will verify is the user is authenticated by trying to refresh the `refresh_token` present in the cookies and returns a boolean value.
+
+
+- Added the file `Root` that will be the root component of our application, makes verifies if the user is authenticated, updates the auth context and renders the application.
+
+
+### Changed
+- In the `Navbar` component, now a verification is made to check if the user is authenticated and if so, the `Sign In` is replaced by the `Sign Out` button.
+
+
+- Also in the `Navbar` component, the `Sign Out` button now calls the `signout` function from the `AuthenticationService` and updates the authentication context.
+
+
+- In the `AuthenticationService` file, added the function `isAuthenticated` that makes a call to the API endpoint `refresh-token` to verify if the user is authenticated by trying the generate a new `acess_token`.
+
+
+- In the `AuthenticationService` file, changed the verification of the `response.status` code from `!= 200` to `!== 200`.
+### Deprecated
+- N/A.
+
+### Removed
+- Removed a console.log from the `useGetBookId` hook.
+
+- Removed the `{withCredentials: true}` from the `axios` configuration in the `axios.js` file in the `POST` request of the interceptor.
+
+### Fixed
+- N/A.
+
+## 2023-09-08
+
+### Added
+- Added the file `AuthenticationService` with the functions:
+    - authenticate - Makes a POST request to the API to authenticate the user.
+    
+    - register - Makes a POST request to the API to register a new user.
+
+
+- Added the file `axios` where these configurations are set:
+    - The base URL for the API.
+    
+    - The `with credentials` option to allow the cookies to be sent from the API.
+- Still in the file `axios` a interceptor was added to handle the `403 Forbidden` error and make a call to the API to refresh the access token.
+
+- Added the hook `useAllBooks` in the file `useBook` that fetches all the books from the API. 
+
+### Changed
+- In both files `BookService` and `ReviewService` the `fetch` function was replaced by the `axios` function.
+
+
+- In the file `Signin` implemented the `handleSignIn` function to handle the sign in form submit.
+
+
+- The `Home` component now uses the authentication context to verify if the user is authenticated and if so, renders the `CreateReview` component. 
+
+
+- The `SignIn` component now after the `authenticate` function is called, the authentication context is updated and the user is redirected to the home page.
+
+
+- In the `index` file the `AuthProvider` was added to wrap the `Root` component instead of just rendering the `App` component.
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
+
+
 ## 2023-08-29
 
 ### Added

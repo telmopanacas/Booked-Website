@@ -2,11 +2,9 @@ import axios from 'axios';
 import parseDate from '../utils/parseDate.js';
 import { createBook, fetchBookId } from '../services/BookService';
 
-const BASE_URL = 'http://localhost:8080/api/v1/avaliacao';
-
 export const fetchAllReviews = async () => {
     try {
-        const response = await axios.get(BASE_URL+"/all")
+        const response = await axios.get("avaliacao/all", {withCredentials: true});
 
         if( response.status !== 200)  {
             throw new Error("Couldn't fetch the data from the 'avaliacao/all' endpoint.");
@@ -37,17 +35,32 @@ export const makePOSTReview = async (titulo, autor, review, rating, votos, livro
         }
     };
 
-    fetch(`${BASE_URL}/new`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(review_created)
-    });
+    const response = await axios.post(
+        "avaliacao/new",
+        {
+            titulo,
+            autor,
+            review,
+            rating,
+            votos,
+            livro : {
+                id: livroId
+            }
+        }
+    );
+
+    if( response.status != 200 ) {
+        throw new Error("Error creating review")
+    }
+
+    const data = response.data;
+    return data;
 }
 
 export const createReview= (bookTitle, bookAuthor, postTitle, username, review, rating, navigate) => {
     fetchBookId(bookTitle, bookAuthor)
     .then((data) => {
-        const bookId = data.id;
+        const bookId = data["id"];
         makePOSTReview(postTitle, username, review, rating, 0, bookId)
         .then(() => {
             alert("Review added successfully");

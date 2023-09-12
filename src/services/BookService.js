@@ -1,13 +1,17 @@
-const BASE_URL = 'http://localhost:8080/api/v1/livro';
+import axios from "axios";
 
 export const fetchBookId = async (bookTitle, bookAuthor) => {
     const query = `titulo=${bookTitle}&autor=${bookAuthor}`
 
-    const response = await fetch(`${BASE_URL}/find?${query}`);
-    if (!response.ok) {
-        throw new Error("Couldn't fetch the data from the 'livro/find' endpoint.");
+    const response = await axios.get(`livro/find?${query}`, {
+        withCredentials: true});
+
+    if( response.status != 200 ) {
+        throw new Error("Error fetching book id");
     }
-    return await response.json();
+
+    const data = response.data;
+    return data;
 }
 
 export const createBook = async (titulo, autor) => {
@@ -16,17 +20,24 @@ export const createBook = async (titulo, autor) => {
         autor
     };
 
-    const response = await fetch(`${BASE_URL}/new`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(book)
-    });
+    const response = await axios.post("livro/new", book);
 
-    if (!response.ok) {
-        throw new Error("Failed to create a new book.");
+    if( response.status != 200 ) {
+        throw new Error("Error creating book");
     }
 
-    const createdBook = await response.json();
+    const data = response.data;
+    return data;
+}
 
-    return createdBook;
+export const fetchAllBooks = async () => {
+    const response = await axios.get("livro/all");
+
+    if ( response.status != 200 ) {
+        throw new Error("Couldn't fetch data from 'livro/all' endpoint");
+    }
+
+    const books = response.data;
+
+    return books;
 }

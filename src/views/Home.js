@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import '../assets/styles/Home.css';
-import PostCard from '../components/PostCard';
 import { useAllReviews } from "../hooks/useReview";
-import { fetchAllReviews } from "../services/ReviewService";
 import ReviewList from "../components/ReviewList";
+import useAuth from "../hooks/useAuth";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -14,13 +12,19 @@ const HomePage = () => {
     }
 
     const { reviews, isPending, error } = useAllReviews();
-
+    const { auth } = useAuth();
     return ( 
         <div className="home-page">
-            <div className="new-review-btt" onClick={handleClickNewReview}>
-                <p>New Review</p>
-                <div className="plus-icon"></div>
-            </div>
+            { auth?.authenticated 
+                ?
+                <div className="new-review-btt" onClick={handleClickNewReview}>
+                    <p>New Review</p>
+                    <div className="plus-icon"></div>
+                </div>
+                :
+                <div></div>
+            }
+            
             { error && <div>{ error }</div> }
             { isPending && <div>Loading...</div>}
             { reviews && <ReviewList reviews={reviews} /> }

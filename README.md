@@ -24,7 +24,7 @@ Guide for writing change logs.
 ## 2023-09-13
 
 ### Added
-- N/A.
+- Added the `RequireAuth` component that will be used to protect the routes that require authentication, if the user is authenticated it redirects him to his desired route otherwise it redirects him to the signin page.
 
 ### Changed
 - In the `AuthenticationService` file, changed the `authenticate` function to set the `access_token` in the response data to the `axios` configuration instead of returning the data and doing it in the `SignIn` component.
@@ -32,6 +32,11 @@ Guide for writing change logs.
 
 - In the `SignIn` component added the function handleRegister to handle the register form submit.
 
+
+- In the `PageLayout` component, surrounded the routes that require authentication with the `RequireAuth` component.
+
+
+- In the `SignIn` component added the `useLocation` hook to get the `from` location to redirect the user after he is authenticated or registered.
 ### Deprecated
 - N/A.
 

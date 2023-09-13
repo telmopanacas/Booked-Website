@@ -1,16 +1,17 @@
-import { Form, Navigate } from 'react-router-dom';
 import '../assets/styles/Signin.css';
 import FormInput from '../components/FormInput.js'
 import { useState } from 'react';
 import FormPasswordInput from '../components/FormPasswordInput';
 import { authenticate, register } from '../services/AuthenticationService';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const SignInForm = ({ setIsAMember }) => {
     const { setAuth } = useAuth();
-    const navigate = new useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/home";
+
     const [signInEmail, setSignInEmail] = useState("");
     const [signInPassword, setSignInPassword] = useState("");
 
@@ -23,7 +24,7 @@ const SignInForm = ({ setIsAMember }) => {
         authenticate(signInEmail, signInPassword)
         .then(() => {
             setAuth({authenticated: true})
-            navigate("/home");
+            navigate(from , { replace: true });
         });
     }
 
@@ -59,6 +60,9 @@ const SignInForm = ({ setIsAMember }) => {
 const RegisterForm = ({ setIsAMember }) => {
     const { setAuth } = useAuth();
     const navigate = new useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/home";
+
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -74,7 +78,7 @@ const RegisterForm = ({ setIsAMember }) => {
         register(registerUsername, registerEmail, registerPassword)
         .then(() => {
             setAuth({authenticated: true});
-            navigate("/home");
+            navigate(from , { replace: true });
         })
     }
 

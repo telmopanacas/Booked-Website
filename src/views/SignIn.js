@@ -3,7 +3,7 @@ import '../assets/styles/Signin.css';
 import FormInput from '../components/FormInput.js'
 import { useState } from 'react';
 import FormPasswordInput from '../components/FormPasswordInput';
-import { authenticate } from '../services/AuthenticationService';
+import { authenticate, register } from '../services/AuthenticationService';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
@@ -21,13 +21,10 @@ const SignInForm = ({ setIsAMember }) => {
     const handleSignIn = (e) => {
         e.preventDefault();
         authenticate(signInEmail, signInPassword)
-        .then((response => {
-            let token = response['access_token'];
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            const authenticated = true;
-            setAuth({authenticated})
+        .then(() => {
+            setAuth({authenticated: true})
             navigate("/home");
-        }));
+        });
     }
 
     return (
@@ -60,15 +57,31 @@ const SignInForm = ({ setIsAMember }) => {
 }
 
 const RegisterForm = ({ setIsAMember }) => {
+    const { setAuth } = useAuth();
+    const navigate = new useNavigate();
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
     
+    const handleSignInClick = () => {
+        setIsAMember(true);
+    }
+
+    const handleRegister = (e) => {
+
+        e.preventDefault();
+        register(registerUsername, registerEmail, registerPassword)
+        .then(() => {
+            setAuth({authenticated: true});
+            navigate("/home");
+        })
+    }
+
     return (
         <div className="signin-form-box">
             <div className="signin-form-div">
-                <form className='signin-form'>
+                <form className='signin-form' onSubmit={handleRegister}>
                     <h1>Create account</h1>
                     <FormInput 
                         label="Username"
@@ -95,6 +108,8 @@ const RegisterForm = ({ setIsAMember }) => {
                         Sign In
                     </button>
                 </form>
+                <div className="divider"></div>
+                <p className='not-member'>Already a member? <span className='create-account' onClick={handleSignInClick}>Sign in to your account.</span></p>
             </div>
         </div>
     );
@@ -107,7 +122,7 @@ const SignInPage = () => {
         <div className="signin-page">
             <div className="signin-image"></div>
             { isAMember && <SignInForm setIsAMember={setIsAMember}/>}
-            { !isAMember && <RegisterForm />}
+            { !isAMember && <RegisterForm  setIsAMember={setIsAMember}/>}
         </div>
     );
 }

@@ -11,8 +11,7 @@ export const authenticate = async (email, password) => {
         throw new Error("Error signing in user")
     }
 
-    const data = response.data;
-    return data;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access_token']}`;
 } 
 
 export const register= async (displayName, email, password) => {

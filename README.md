@@ -21,6 +21,17 @@ Guide for writing change logs.
 `Fixed`  for any bug fixes.
 
 
+## 2023-09-13
+
+### Added
+- N/A.
+
+### Changed
+- In the `AuthenticationService` file, changed the `authenticate` function to set the `access_token` in the response data to the `axios` configuration instead of returning the data and doing it in the `SignIn` component.
+
+
+- In the `SignIn` component added the function handleRegister to handle the register form submit.
+
 ## 2023-09-12
 
 ### Added

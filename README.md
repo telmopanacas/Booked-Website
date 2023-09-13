@@ -32,6 +32,18 @@ Guide for writing change logs.
 
 - In the `SignIn` component added the function handleRegister to handle the register form submit.
 
+### Deprecated
+- N/A.
+
+
+### Removed
+- N/A.
+
+
+### Fixed
+- N/A.
+
+
 ## 2023-09-12
 
 ### Added

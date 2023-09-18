@@ -20,6 +20,53 @@ Guide for writing change logs.
 
 `Fixed`  for any bug fixes.
 
+## 2023-09-18
+
+### Added
+- Added a new utility file `getCurrentUserEmail` that decodes the access_token in the axios configuration and returns the subject, the user email. It will be called in the `Create Review` page.
+
+
+- Added a new service file `UserService` that will contain all the API calls related to the user.
+    - Contains the function `getUserDetails` where it uses the user email to fetch the users id and username.
+
+
+- Added a new hook `useUserDetails` that uses the new function `getUserDetails` and returns those values. It's used in the `Create Review` page.
+
+### Changed
+- Changed the background color of the username component in the `Create Review` form to grey to signalize its value cannot be changed. 
+
+
+- Disabled the background color of the input field when its `disabled` in the username component of the `Create Review` form.
+
+
+- Changed the padding of the `Landing Page` title to match the same of the `Navbar`.
+
+
+- Changed the font-size of the `Navbar` title to match the one in the `Landing Page`.
+
+
+- Changed the `Username` component so that its value is now defined through a props value.
+
+
+- The fucntion `isAuthenticated` now also sets the `Bearer token` in the axios configuration.
+
+
+- In the file `ReviewService` changed the functions `makePOSTReview` and `createReview` to now use the `userId` instead of an `author` filed.
+
+
+- In the `Contact` page change the labels for the User name and Users email to be more cleaner.
+
+
+- Changed the `Create Review` page to now use hook `useUserDetails`.
+
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
 
 ## 2023-09-13
 

@@ -1,17 +1,19 @@
 import '../assets/styles/FormUsernameAndRating.css'
 
 
-const Username = ({ setUsername}) => {
+const Username = ({ username}) => {
     return (
         <div className="username-design">
             <div className="username-outside">
                 <div className="username-inside">
                     <label>Username</label>
                     <input 
+                        value={username}
+                        disabled
                         type="text" 
                         required
                         placeholder="Your username"
-                        onChange={(e) => setUsername(e.target.value)}
+
                     />
                 </div>
             </div>
@@ -40,10 +42,10 @@ const Rating = ({ rating, setRating }) => {
     );
 }
 
-const FormUsernameAndRating = ({ setUsername, setRating }) => {
+const FormUsernameAndRating = ({ username, setRating }) => {
     return (  
         <div className="usernameAndRating">
-            <Username  setUsername={setUsername}/>
+            <Username  username={username}/>
             <Rating  setRating={setRating}/>
         </div>
     );

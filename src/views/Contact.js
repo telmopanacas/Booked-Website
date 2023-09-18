@@ -36,14 +36,14 @@ const ContactPage = () => {
                     <form ref={form} onSubmit={sendEmail}> 
                         <FormInput 
                             name="user_name"
-                            label="Your name" 
+                            label="Name" 
                             placeholder="Please enter your name"
                             setInput={() => {}}
                         />
                         <FormInput 
                             name="user_email"
                             type="email"
-                            label="Your email"
+                            label="Email"
                             placeholder="Please enter your email"
                             setInput={() => {}}
                         />

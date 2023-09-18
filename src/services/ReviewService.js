@@ -23,33 +23,25 @@ export const fetchAllReviews = async () => {
     }
 }
 
-export const makePOSTReview = async (titulo, autor, review, rating, votos, livroId) => {
-    const review_created = { 
-        titulo,
-        autor, 
-        review, 
-        rating, 
-        votos, 
-        livro: {
-            id: livroId
-        }
-    };
+export const makePOSTReview = async (titulo, userId, review, rating, votos, livroId) => {
 
     const response = await axios.post(
         "avaliacao/new",
         {
             titulo,
-            autor,
             review,
             rating,
             votos,
             livro : {
                 id: livroId
+            },
+            user : {
+                id: userId
             }
         }
     );
 
-    if( response.status != 200 ) {
+    if( response.status !== 200 ) {
         throw new Error("Error creating review")
     }
 
@@ -57,11 +49,11 @@ export const makePOSTReview = async (titulo, autor, review, rating, votos, livro
     return data;
 }
 
-export const createReview= (bookTitle, bookAuthor, postTitle, username, review, rating, navigate) => {
+export const createReview= (bookTitle, bookAuthor, postTitle, userId, review, rating, navigate) => {
     fetchBookId(bookTitle, bookAuthor)
     .then((data) => {
         const bookId = data["id"];
-        makePOSTReview(postTitle, username, review, rating, 0, bookId)
+        makePOSTReview(postTitle, userId, review, rating, 0, bookId)
         .then(() => {
             alert("Review added successfully");
             navigate("/home");
@@ -73,7 +65,7 @@ export const createReview= (bookTitle, bookAuthor, postTitle, username, review, 
         createBook(bookTitle, bookAuthor)
         .then((data) => {
             const bookId = data.id;
-            makePOSTReview(postTitle, username, review, rating, 0, bookId)
+            makePOSTReview(postTitle, userId, review, rating, 0, bookId)
             .then(() => {
                 alert("Review added successfully");
                 navigate("/home");

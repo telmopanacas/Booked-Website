@@ -14,8 +14,8 @@ h1, h3 {
 .top {
     flex: 0 0 auto; /* Não crescerá nem encolherá, tamanho automático */
     text-align: start;
-    padding-left: 30px;
-    padding-top: 30px;
+    padding-left: 50px;
+    padding-top: 28px;
 }
 
 .top h1 {

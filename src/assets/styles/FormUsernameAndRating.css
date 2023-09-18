@@ -12,6 +12,7 @@
     border-radius: 8px;
     padding: 4px 7px; /* top & bottom then left & right */
     margin-bottom: 15px;
+    background-color: rgba(94, 99, 102, 0.1); /* Opacity is the last value */
 }
 
 .username-inside {
@@ -34,6 +35,9 @@
     outline: none;
     border: 0;
     color: #5E6366;
+}
+.username-inside input:disabled{
+    background-color: transparent;
 }
 
 .rating-outside {

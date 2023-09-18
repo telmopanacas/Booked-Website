@@ -35,6 +35,7 @@ export const isAuthenticated = async () => {
         return false;
     }
 
+    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access_token']}`;
     return true;
 }
 

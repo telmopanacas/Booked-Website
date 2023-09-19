@@ -1,6 +1,7 @@
 import axios from 'axios';
 import parseDate from '../utils/parseDate.js';
 import { createBook, fetchBookId } from '../services/BookService';
+import { toast } from 'sonner';
 
 export const fetchAllReviews = async () => {
     try {
@@ -53,10 +54,13 @@ export const createReview= (bookTitle, bookAuthor, postTitle, userId, review, ra
     fetchBookId(bookTitle, bookAuthor)
     .then((data) => {
         const bookId = data["id"];
-        makePOSTReview(postTitle, userId, review, rating, 0, bookId)
-        .then(() => {
-            alert("Review added successfully");
-            navigate("/home");
+        toast.promise(makePOSTReview(postTitle, userId, review, rating, 0, bookId), {
+            loading: "Posting review...",
+            success: () => {
+                navigate("/home");
+                return "Review posted successfully!"
+            },
+            error: "Error posting the review."
         });
     })
     // The book doesn't exist in the database. And we have to create it first.
@@ -65,10 +69,13 @@ export const createReview= (bookTitle, bookAuthor, postTitle, userId, review, ra
         createBook(bookTitle, bookAuthor)
         .then((data) => {
             const bookId = data.id;
-            makePOSTReview(postTitle, userId, review, rating, 0, bookId)
-            .then(() => {
-                alert("Review added successfully");
-                navigate("/home");
+            toast.promise(makePOSTReview(postTitle, userId, review, rating, 0, bookId), {
+                loading: "Posting review...",
+                success: () => {
+                    navigate("/home");
+                    return "Review posted successfully!"
+                },
+                error: "Error posting the review."
             });
         })
         .catch(error => {

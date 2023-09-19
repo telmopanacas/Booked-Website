@@ -32,7 +32,7 @@ const CreateReviewPage = () => {
         }
     }, [isPending, userDetails, setUserId]);
 
-    return ( 
+    return (
         <div className="create-page">
             <div className="left-side">
             {

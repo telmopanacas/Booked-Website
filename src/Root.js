@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import App from "./App";
 import { useIsAuthenticated } from "./hooks/useIsAuthenticated";
 import useAuth from "./hooks/useAuth";
+import { Toaster } from "sonner";
 
 const Root = () => {
     const { setAuth } = useAuth();
@@ -21,7 +22,10 @@ const Root = () => {
     }
 
     return (
+        <>
+        <Toaster position="top-right" />
         <App />
+        </>
     );
 
 };

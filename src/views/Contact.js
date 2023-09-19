@@ -3,6 +3,7 @@ import FormInput from '../components/FormInput.js'
 import FormTextArea from '../components/FormTextArea';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { toast } from 'sonner';
 
 const ContactPage = () => {
     const form = useRef();
@@ -12,17 +13,18 @@ const ContactPage = () => {
         e.preventDefault();
         setIsPending(true);
 
-        emailjs.sendForm(
+        toast.promise(emailjs.sendForm(
             `${process.env.REACT_APP_EMAILJS_SERVICE_ID}`, 
             `${process.env.REACT_APP_EMAILJS_TEMPLATE_ID}`, 
             form.current, 
             `${process.env.REACT_APP_EMAILJS_PUBLIC_KEY}`, 
-        )
-        .then((result) => {
-            setIsPending(false);
-            alert("The email was sent successfully!");
-        }, (error) => {
-            console.log(error.text);
+        ), {
+            loading: "Sending email...",
+            success: (result) => {
+                setIsPending(false);
+                return "The email was sent successfully!";
+            },
+            error: "Error sending email.",
         });
     };
 

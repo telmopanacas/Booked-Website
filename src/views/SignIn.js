@@ -5,6 +5,7 @@ import FormPasswordInput from '../components/FormPasswordInput';
 import { authenticate, register } from '../services/AuthenticationService';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { toast } from 'sonner'
 
 const SignInForm = ({ setIsAMember }) => {
     const { setAuth } = useAuth();
@@ -15,16 +16,29 @@ const SignInForm = ({ setIsAMember }) => {
     const [signInEmail, setSignInEmail] = useState("");
     const [signInPassword, setSignInPassword] = useState("");
 
+    const [isPending, setIsPending] = useState(false);
+
     const handleCreateAccountClick = () => {
         setIsAMember(false);
     }
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        authenticate(signInEmail, signInPassword)
-        .then(() => {
-            setAuth({authenticated: true})
-            navigate(from , { replace: true });
+        setIsPending(true);
+        toast.promise(authenticate(signInEmail, signInPassword), {
+            loading: () => {
+                return "Singin In...";
+            },
+            success: () => {
+                setIsPending(false);
+                setAuth({authenticated: true})
+                navigate(from , { replace: true });
+                return "Signed in successfully";
+            },
+            error: (error) => {
+                setIsPending(false);
+                return "Credentials invalid please verify them.";
+            },
         });
     }
 
@@ -46,9 +60,19 @@ const SignInForm = ({ setIsAMember }) => {
                     <div className="forgot-password">
                         <p>forgot password?</p>
                     </div>
-                    <button>
-                        Sign In
-                    </button>
+                    { 
+                        isPending &&
+                        <button>
+                            Signing In...
+                        </button>
+                    }
+                    { 
+                        !isPending &&
+                        <button>
+                            Sign In
+                        </button>
+                    }
+                    
                 </form>
                 <div className="divider"></div>
                 <p className='not-member'>Not a member? <span className='create-account' onClick={handleCreateAccountClick}>Create your account.</span></p>
@@ -62,6 +86,7 @@ const RegisterForm = ({ setIsAMember }) => {
     const navigate = new useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/home";
+    const [isPending, setIsPending] = useState(false);
 
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
@@ -75,11 +100,23 @@ const RegisterForm = ({ setIsAMember }) => {
     const handleRegister = (e) => {
 
         e.preventDefault();
-        register(registerUsername, registerEmail, registerPassword)
-        .then(() => {
-            setAuth({authenticated: true});
-            navigate(from , { replace: true });
-        })
+        setIsPending(true);
+        toast.promise(register(registerUsername, registerEmail, registerPassword, registerConfirmPassword), {
+            loading: () => {
+                return "Signing Up...";
+            },
+            success: () => {
+                setIsPending(false);
+                setAuth({authenticated: true})
+                navigate(from , { replace: true });
+                return "Signed up successfully"
+            },
+            error: (error) => {
+                setIsPending(false);
+                console.log(error);
+                return "Credentials invalid please verify them."
+            },
+        });
     }
 
     return (
@@ -107,10 +144,19 @@ const RegisterForm = ({ setIsAMember }) => {
                         placeholder="Enter your password again"
                         setInput={setRegisterPassword}
                     />
+                    {
+                        isPending &&
+                        <button>
+                            Signing Up...
+                        </button>
+                    }
+                    {
+                        !isPending &&
+                        <button>
+                            Sign Up
+                        </button>
+                    }
                     
-                    <button>
-                        Sign In
-                    </button>
                 </form>
                 <div className="divider"></div>
                 <p className='not-member'>Already a member? <span className='create-account' onClick={handleSignInClick}>Sign in to your account.</span></p>
@@ -122,7 +168,7 @@ const RegisterForm = ({ setIsAMember }) => {
 
 const SignInPage = () => {
     const [isAMember, setIsAMember] = useState(true);
-    return ( 
+    return (
         <div className="signin-page">
             <div className="signin-image"></div>
             { isAMember && <SignInForm setIsAMember={setIsAMember}/>}

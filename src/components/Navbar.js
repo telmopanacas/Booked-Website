@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../assets/styles/Navbar.css'
 import useAuth from '../hooks/useAuth';
 import { signout } from '../services/AuthenticationService';
+import { toast } from 'sonner';
+
 
 const Navbar = () => {
     const { auth , setAuth} = useAuth();
@@ -13,10 +15,13 @@ const Navbar = () => {
 
     const handleSignOutClick = () => {
         setAuth({authenticated: false});
-        signout()
-        .then(() => {
-            alert("User Signed Out");
-            navigate("/home");
+        toast.promise(signout(), {
+            loading: "Signing out...",
+            success: () => {
+                navigate("/home");
+                return "Signed out successfully!"
+            },
+            error: "Error signing out.",
         });
     }
     

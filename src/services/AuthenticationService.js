@@ -1,7 +1,7 @@
 import axios from "axios";
+import sleep from '../utils/sleep';
 
 export const authenticate = async (email, password) => {
-
     const response = await axios.post(
         "auth/authenticate",
         {email, password}
@@ -14,8 +14,11 @@ export const authenticate = async (email, password) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access_token']}`;
 } 
 
-export const register= async (displayName, email, password) => {
-
+export const register= async (displayName, email, password, confirmPassword) => {
+    if ( password !== confirmPassword ) {
+        throw new Error("Passwords don't match");
+    }
+    
     const response = await axios.post(
         "auth/register",
         {displayName, email, password}

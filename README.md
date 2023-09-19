@@ -6,6 +6,9 @@ This is the React based website for this project: [Booked](https://www.figma.com
 
 The corresponding RESTfull API can be found [here](https://github.com/telmopanacas/Booked-API).
 
+# Disclamer:
+- The toasts used in this project are from the package [Sonner](https://sonner.emilkowal.ski/) that was made by [Emil Kowalsk](https://github.com/emilkowalski).
+
 
 # Change Log
 Guide for writing change logs.
@@ -19,6 +22,45 @@ Guide for writing change logs.
 `Removed` for now removed features.
 
 `Fixed`  for any bug fixes.
+
+
+# To-Do List:
+- [ ] Adapt error messages to custom error responses from API.
+
+
+- [ ] Integrate Open Libary API or something similar to validate books.
+
+
+- [ ] Implement votes on reviews.
+
+
+- [ ] Implement comments on reviews.
+
+## 2023-09-19
+
+### Added
+- Added the util file `sleep` with the function `sleep` to help test the new toast integration.
+
+### Changed
+- Integrated the new toasts in the components `Navbar, Contact, Create Review, Sign In` and `Root`.
+
+
+- In the file `ReviewService` integrated the new toasts.
+
+
+- In the `AuthenticationService` file, now a password confirmation is made to see if the password and confirmPassword match.
+
+### Deprecated
+- N/A.
+
+
+### Removed
+- N/A.
+
+
+### Fixed
+- N/A.
+
 
 ## 2023-09-18
 

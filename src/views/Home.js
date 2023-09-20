@@ -25,7 +25,7 @@ const HomePage = () => {
                 <div></div>
             }
             
-            { error && <div>{ error }</div> }
+            { error && <div> Couldn't load reviews </div> }
             { isPending && <div>Loading...</div>}
             { reviews && <ReviewList reviews={reviews} /> }
             

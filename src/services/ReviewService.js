@@ -4,24 +4,20 @@ import { createBook, fetchBookId } from '../services/BookService';
 import { toast } from 'sonner';
 
 export const fetchAllReviews = async () => {
-    try {
-        const response = await axios.get("avaliacao/all", {withCredentials: true});
 
-        if( response.status !== 200)  {
-            throw new Error("Couldn't fetch the data from the 'avaliacao/all' endpoint.");
-        }
-        
-        const reviews = response.data;
-        reviews.sort((a, b) => {
-            const dateA = parseDate(a.dataAvaliacao, a.horaAvaliacao);
-            const dateB = parseDate(b.dataAvaliacao, b.horaAvaliacao);
-            return dateB - dateA;
-        });
-        return reviews;
-
-    } catch (error) {
-        throw error;
+    const response = await axios.get("avaliacao/all", {withCredentials: true});
+    if( response.status !== 200)  {
+        throw new Error(response.response.data.message);
     }
+    
+    const reviews = response.data;
+    reviews.sort((a, b) => {
+        const dateA = parseDate(a.dataAvaliacao, a.horaAvaliacao);
+        const dateB = parseDate(b.dataAvaliacao, b.horaAvaliacao);
+        return dateB - dateA;
+    });
+    return reviews;
+
 }
 
 export const makePOSTReview = async (titulo, userId, review, rating, votos, livroId) => {
@@ -43,7 +39,7 @@ export const makePOSTReview = async (titulo, userId, review, rating, votos, livr
     );
 
     if( response.status !== 200 ) {
-        throw new Error("Error creating review")
+        throw new Error("Error creating review.")
     }
 
     const data = response.data;

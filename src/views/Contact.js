@@ -19,12 +19,16 @@ const ContactPage = () => {
             form.current, 
             `${process.env.REACT_APP_EMAILJS_PUBLIC_KEY}`, 
         ), {
-            loading: "Sending email...",
+            loading: () => {
+                return "Sending email...";
+            },
             success: (result) => {
                 setIsPending(false);
                 return "The email was sent successfully!";
             },
-            error: "Error sending email.",
+            error: (error) => {
+                return "Error sending email.";
+            },
         });
     };
 

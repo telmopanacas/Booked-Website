@@ -8,7 +8,7 @@ export const getUserDetails = async (email) => {
     );
 
     if ( response.status !== 200 ) {
-        throw new Error("Error obtaining user details");
+        throw new Error("Error obtaining user details.");
     }
 
     var userDetails = response.data;

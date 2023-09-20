@@ -18,7 +18,7 @@ const Navbar = () => {
         toast.promise(signout(), {
             loading: "Signing out...",
             success: () => {
-                navigate("/home");
+                navigate("/signin");
                 return "Signed out successfully!"
             },
             error: "Error signing out.",

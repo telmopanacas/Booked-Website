@@ -3,7 +3,7 @@ import FormInput from '../components/FormInput.js'
 import { useState } from 'react';
 import FormPasswordInput from '../components/FormPasswordInput';
 import { authenticate, register } from '../services/AuthenticationService';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'sonner'
 
@@ -33,7 +33,7 @@ const SignInForm = ({ setIsAMember }) => {
                 setIsPending(false);
                 setAuth({authenticated: true})
                 navigate(from , { replace: true });
-                return "Signed in successfully";
+                return "Signed in successfully!";
             },
             error: (error) => {
                 setIsPending(false);
@@ -109,12 +109,12 @@ const RegisterForm = ({ setIsAMember }) => {
                 setIsPending(false);
                 setAuth({authenticated: true})
                 navigate(from , { replace: true });
-                return "Signed up successfully"
+                return "Signed up successfully!"
             },
             error: (error) => {
                 setIsPending(false);
-                console.log(error);
-                return "Credentials invalid please verify them."
+                
+                return `${error.message}`;
             },
         });
     }
@@ -142,7 +142,7 @@ const RegisterForm = ({ setIsAMember }) => {
                     <FormPasswordInput 
                         label="Confirm password"
                         placeholder="Enter your password again"
-                        setInput={setRegisterPassword}
+                        setInput={setRegisterConfirmPassword}
                     />
                     {
                         isPending &&

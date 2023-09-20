@@ -8,7 +8,7 @@ export const authenticate = async (email, password) => {
     );
 
     if( response.status !== 200 ) {
-        throw new Error("Error signing in user")
+        throw new Error("Error signing in user.")
     }
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access_token']}`;
@@ -16,7 +16,7 @@ export const authenticate = async (email, password) => {
 
 export const register= async (displayName, email, password, confirmPassword) => {
     if ( password !== confirmPassword ) {
-        throw new Error("Passwords don't match");
+        throw new Error("Passwords don't match, check them again.");
     }
     
     const response = await axios.post(
@@ -25,7 +25,7 @@ export const register= async (displayName, email, password, confirmPassword) => 
     );
 
     if( response.status !== 200 ) {
-        throw new Error("Couldn't register new user")
+        throw new Error(response.response.data.message)
     }
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access_token']}`;
@@ -46,6 +46,6 @@ export const signout = async () => {
     const response = await axios.post("auth/logout");
 
     if ( response.status !== 200 ) {
-        throw new Error("Error loggin out");
+        throw new Error("Error loggin out.");
     }
 }

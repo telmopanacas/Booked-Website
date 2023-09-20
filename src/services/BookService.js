@@ -6,8 +6,8 @@ export const fetchBookId = async (bookTitle, bookAuthor) => {
     const response = await axios.get(`livro/find?${query}`, {
         withCredentials: true});
 
-    if( response.status != 200 ) {
-        throw new Error("Error fetching book id");
+    if( response.status !== 200 ) {
+        throw new Error("Error fetching book id.");
     }
 
     const data = response.data;
@@ -22,8 +22,8 @@ export const createBook = async (titulo, autor) => {
 
     const response = await axios.post("livro/new", book);
 
-    if( response.status != 200 ) {
-        throw new Error("Error creating book");
+    if( response.status !== 200 ) {
+        throw new Error("Error creating book.");
     }
 
     const data = response.data;
@@ -33,8 +33,8 @@ export const createBook = async (titulo, autor) => {
 export const fetchAllBooks = async () => {
     const response = await axios.get("livro/all");
 
-    if ( response.status != 200 ) {
-        throw new Error("Couldn't fetch data from 'livro/all' endpoint");
+    if ( response.status !== 200 ) {
+        throw new Error("Couldn't fetch data from 'livro/all' endpoint.");
     }
 
     const books = response.data;

@@ -25,16 +25,61 @@ Guide for writing change logs.
 
 
 # To-Do List:
-- [ ] Adapt error messages to custom error responses from API.
+- [x] ~~Adapt error messages to custom error responses from API.~~ ( **Finished** )
 
 
-- [ ] Integrate Open Libary API or something similar to validate books.
+- [ ] Integrate Open Libary API or something similar to validate books. ( **In Progress** )
 
 
 - [ ] Implement votes on reviews.
 
 
 - [ ] Implement comments on reviews.
+
+
+- [ ] Implement the search functionality.
+
+## 2023-09-20
+
+### Added
+- N/A.
+
+
+### Changed
+- In the `Navbar` component, after sigining out the user is redirected to the `Sign In` page instead of the `Home` page.
+
+
+- In the `AuthenticationService` file, changed the errors messages and in some cases now it uses the direct response from the API.
+
+
+- In the `BookService` file, changed the operator from `!=` to `!==` in the verification of the `response.status` code.
+
+
+- In the `ReviewService` file, changed the error message to the one sent by the API and also removed an unnecessary `try catch` block.
+
+
+- In the `UserService` file, changed the error message.
+
+
+- In the `Contact` page, changed the `toast.promise` parameters for better usage.
+
+
+- In the `SignIn` page, changed the `success` and `error` messages
+
+
+### Deprecated
+- N/A.
+
+
+### Removed
+- In the `SignIn` page, removed an unnecessary import.
+
+
+### Fixed
+- In the `Home` page there was an error where if there was an error in the `useAllReviews` hook, the page would crash because I was trying to render the error instead of the error message. Now it's fixed.
+
+
+- In the `SignIn` page in the `RegisterForm` component, for the `confirmPassword` input field, I was using the `setRegisterPassword` function instead of the `setRegisterConfirmPassword` function. Now it's fixed.
 
 ## 2023-09-19
 

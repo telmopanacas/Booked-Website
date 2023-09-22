@@ -49,6 +49,7 @@ const SignInForm = ({ setIsAMember }) => {
                     <h1>Sign In</h1>
                     <FormInput 
                         label="Email"
+                        type="email"
                         placeholder="Enter your email"
                         setInput={setSignInEmail}
                     />

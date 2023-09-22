@@ -4,7 +4,7 @@ import { useAllReviews } from "../hooks/useReview";
 import ReviewList from "../components/ReviewList";
 import useAuth from "../hooks/useAuth";
 
-const HomePage = () => {
+const HomePage = ({searchResults}) => {
     const navigate = useNavigate();
 
     const handleClickNewReview = () => {
@@ -25,9 +25,11 @@ const HomePage = () => {
                 <div></div>
             }
             
+            { searchResults && <ReviewList reviews={searchResults} />}
+
             { error && <div> Couldn't load reviews </div> }
             { isPending && <div>Loading...</div>}
-            { reviews && <ReviewList reviews={reviews} /> }
+            { reviews && !searchResults &&<ReviewList reviews={reviews} /> }
             
         </div>
     );

@@ -28,7 +28,7 @@ Guide for writing change logs.
 - [x] ~~Adapt error messages to custom error responses from API.~~ ( **Finished** )
 
 
-- [ ] Integrate Open Libary API or something similar to validate books. ( **In Progress** )
+- [ ] Integrate Open Libary API or something similar to validate books.
 
 
 - [ ] Implement votes on reviews.
@@ -37,7 +37,39 @@ Guide for writing change logs.
 - [ ] Implement comments on reviews.
 
 
-- [ ] Implement the search functionality.
+- [x] ~~Implement the search functionality.~~ ( **Finished** )
+
+## 2023-09-22
+
+### Added
+- N/A.
+
+### Changed
+- In the `Navbar` component added the function `handleSearch` that contains the logic of the search funtionality.
+
+
+- In the `Navbar` component assigned the function `handleSearch` to the `search` component.
+
+
+- In the `PageLayout` component created the `searchResults` that will be passed down to the `Navbar` and `Home` components through props.
+
+
+- In the `ReviewService` added the function `searchReview` that takes the user input from the searchbox and makes a request to the API for the reviews that contain that input.
+
+
+- The `Home` component now shows the `searchResults`, that contains the reviews from the searchbox query, if its not null.
+
+
+- In the `SignIn` page changed the email input to have the `type` `email`.
+
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
 
 ## 2023-09-20
 

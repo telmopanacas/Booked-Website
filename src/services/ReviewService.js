@@ -78,3 +78,21 @@ export const createReview= (bookTitle, bookAuthor, postTitle, userId, review, ra
         });
     }));
 }
+
+export const searchReview = async (searchInput) => {
+    const query = `searchInput=${searchInput}`;
+
+    const response = await axios.get(`avaliacao/search?${query}`);
+
+    if ( response.status !== 200 ) {
+        throw new Error("Couldn't search reviews.");
+    }
+
+    const data = response.data;
+    data.sort((a, b) => {
+        const dateA = parseDate(a.dataAvaliacao, a.horaAvaliacao);
+        const dateB = parseDate(b.dataAvaliacao, b.horaAvaliacao);
+        return dateB - dateA;
+    });
+    return data;
+}

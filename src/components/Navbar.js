@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import '../assets/styles/Navbar.css'
 import useAuth from '../hooks/useAuth';
 import { signout } from '../services/AuthenticationService';
 import { toast } from 'sonner';
+import { searchReview } from '../services/ReviewService';
 
 
-const Navbar = () => {
+const Navbar = ({setSearchResults}) => {
     const { auth , setAuth} = useAuth();
     const navigate = useNavigate();
+    const inputRef = useRef(null);
+
     const handleLogoClink = () => {
         navigate('/home');
     }
@@ -24,14 +27,41 @@ const Navbar = () => {
             error: "Error signing out.",
         });
     }
+
+    const handleSearch = () => {
+        const searchInput = inputRef.current.value;
+        toast.promise(searchReview(searchInput), {
+            loading: () => {
+                return "Searching...";
+            },
+            success: (data) => {
+                setSearchResults(data);
+                navigate("/home");
+                return "Search successfully";
+            },
+            error: (error) => {
+                return `${error.message}`;
+            },
+        });
+    }
     
     return ( 
         <nav className="navbar">
             <h1 onClick={ handleLogoClink }>Booked</h1>
             <div className="search">
                 <div className="search-content">
-                    <div className="search-icon"></div>
-                    <input type="text" className="search-input" placeholder='Search for a book'/>
+                    <div className="search-icon" onClick={handleSearch}></div>
+                    <input 
+                        ref={inputRef}
+                        type="text" 
+                        className="search-input"
+                        placeholder='Search a book, author or user'
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter') {
+                                handleSearch();
+                            }
+                        }}
+                    />
                 </div>
             </div>
             <div className="links">

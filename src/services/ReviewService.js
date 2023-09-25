@@ -96,3 +96,15 @@ export const searchReview = async (searchInput) => {
     });
     return data;
 }
+
+export const updateReviewVotes = async (reviewId, votes) => {
+    const query = `votos=${votes}`;
+
+    const response = await axios.put(`avaliacao/${reviewId}?${query}`);
+
+    if ( response.status !== 200 ) {
+        throw new Error("Error upvoting review.");
+    }
+
+}
+

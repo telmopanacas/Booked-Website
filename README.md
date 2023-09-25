@@ -31,7 +31,7 @@ Guide for writing change logs.
 - [ ] Integrate Open Libary API or something similar to validate books.
 
 
-- [ ] Implement votes on reviews.
+- [ ] Implement votes on reviews. ( **In progress** )
 
 
 - [ ] Implement comments on reviews.

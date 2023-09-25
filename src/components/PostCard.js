@@ -1,11 +1,15 @@
 import '../assets/styles/PostCard.css'
 import getCurrentTime from '../utils/getCurrentTime.js'
 import getCurrentDate from '../utils/getCurrentDate.js'
+import { FaArrowUp, FaArrowDown } from "react-icons/fa6"
+import { useState } from 'react'
+import { updateReviewVotes } from '../services/ReviewService'
+import { toast } from 'sonner'
 
 
 
 const RatingStars = ({ rating }) => {
-    if(rating == 1) {
+    if(rating === 1) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -19,7 +23,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating == 2) {
+    if(rating === 2) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -33,7 +37,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating == 3) {
+    if(rating === 3) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -47,7 +51,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating == 4) {
+    if(rating === 4) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -61,7 +65,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating == 5) {
+    if(rating === 5) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -80,7 +84,7 @@ const RatingStars = ({ rating }) => {
 }
 
 
-const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, date, time }) => {
+const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, review, date, time, votes }) => {
     
     const displayPostTitle = postTitle !== '' ? postTitle : 'Post title';
     const displayBookTitle = bookTitle !== '' ? bookTitle : 'Book title';
@@ -90,6 +94,40 @@ const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, 
 
     const displayTime = time === undefined ? getCurrentTime() : time;
     const displayDate = date === undefined ? getCurrentDate() : date;
+
+    const [displayedVotes, setDisplayedVotes] = useState(votes);
+
+    const handleUpvote = () => {
+        // To prevent from being used in the Create Review page
+        if ( postId !== undefined ) {
+            
+            updateReviewVotes(postId, displayedVotes+1)
+            .then(() => {
+                toast.success("Review upvoted!");
+                setDisplayedVotes(displayedVotes+1);
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+            
+        }
+        
+    }
+
+    const handleDownvote = () => {
+        if ( postId !== undefined) {
+            
+            updateReviewVotes(postId, displayedVotes-1)
+            .then(() => {
+                toast.success("Review downvoted!");
+                setDisplayedVotes(displayedVotes-1);
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+            
+        }
+    }
 
     
     return ( 
@@ -107,9 +145,17 @@ const PostCard = ({ postTitle, bookTitle, bookAuthor, username, rating, review, 
                     <div className="review" >
                         <p>{ displayReview }</p>
                     </div>
-                    <div className="post-author">
-                        <p>By: { displayUsername } <span>{ displayDate }</span></p>
+                    <div className="bottom">
+                        <div className='votes'>
+                            <FaArrowUp onClick={handleUpvote}/>
+                            { displayedVotes }
+                            <FaArrowDown onClick={handleDownvote}/>
+                        </div>
+                        <div className="post-author">
+                            <p>By: { displayUsername } <span>{ displayDate }</span></p>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

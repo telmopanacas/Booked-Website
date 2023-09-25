@@ -44,6 +44,7 @@ const CreateReviewPage = () => {
                         username={"Error getting username"}
                         rating={rating}
                         review={review}
+                        votes={0}
                     />
                 }
                 {
@@ -55,6 +56,7 @@ const CreateReviewPage = () => {
                         username={"Your username"}
                         rating={rating}
                         review={review}
+                        votes={0}
                     />
                 }
                 {
@@ -66,6 +68,7 @@ const CreateReviewPage = () => {
                         username={userDetails["displayName"]}
                         rating={rating}
                         review={review}
+                        votes={0}
                     />
                 }
                 

@@ -88,3 +88,18 @@
 .max-rating {
     color: #979797;
 }
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.votes {
+    display: flex;
+    justify-content: space-evenly;
+    gap: .8em;
+}
+
+.votes svg {
+    cursor: pointer;
+}

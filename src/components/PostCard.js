@@ -5,6 +5,7 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6"
 import { useState } from 'react'
 import { updateReviewVotes } from '../services/ReviewService'
 import { toast } from 'sonner'
+import useAuth from '../hooks/useAuth'
 
 
 
@@ -85,7 +86,7 @@ const RatingStars = ({ rating }) => {
 
 
 const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, review, date, time, votes }) => {
-    
+    const { userId, userUpvotedReviews, userDownvotedReviews } = useAuth();
     const displayPostTitle = postTitle !== '' ? postTitle : 'Post title';
     const displayBookTitle = bookTitle !== '' ? bookTitle : 'Book title';
     const displayBookAuthor= bookAuthor !== '' ? bookAuthor : 'Book author';
@@ -149,7 +150,7 @@ const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, 
                         <div className='votes'>
                             <FaArrowUp onClick={handleUpvote}/>
                             { displayedVotes }
-                            <FaArrowDown onClick={handleDownvote}/>
+                            <FaArrowDown onClick={handleDownvote} style={{color: userDownvotedReviews.includes(postId) ? '#0000FF': ''}}/>
                         </div>
                         <div className="post-author">
                             <p>By: { displayUsername } <span>{ displayDate }</span></p>

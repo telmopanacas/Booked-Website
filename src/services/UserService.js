@@ -14,3 +14,29 @@ export const getUserDetails = async (email) => {
     var userDetails = response.data;
     return userDetails;
 }
+
+export const getUserUpvotedReviews = async(userId) => {
+    const response = await axios.get(
+        `user/${userId}/upvoted`
+    );
+
+    if( response.status !== 200 ) {
+        throw new Error("Coudln't get upvoted reviews.");
+    }
+
+    const upvotedReviews = response.data;
+    return upvotedReviews;
+}
+
+export const getUserDownvotedReviews = async(userId) => {
+    const response = await axios.get(
+        `user/${userId}/downvoted`
+    );
+
+    if( response.status !== 200 ) {
+        throw new Error("Coudln't get upvoted reviews.");
+    }
+
+    const downvotedReviews = response.data;
+    return downvotedReviews;
+}

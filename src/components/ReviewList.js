@@ -6,6 +6,7 @@ const ReviewList = ({ reviews }) => {
             {reviews.map((review) => (
                 <div key={review.id}>
                     <PostCard 
+                        postId={review.id}
                         postTitle={review['tituloAvaliacao']}
                         bookTitle={review['tituloLivro']}
                         bookAuthor={review['autorLivro']}
@@ -14,6 +15,7 @@ const ReviewList = ({ reviews }) => {
                         review={review['review']}
                         date={review['dataAvaliacao']}
                         time={review['horaAvaliacao']}
+                        votes={review['votos']}
                     />
                 </div>
             ))}

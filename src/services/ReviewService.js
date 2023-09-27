@@ -96,3 +96,31 @@ export const searchReview = async (searchInput) => {
     });
     return data;
 }
+
+export const upvoteReview = async (avaliacaoId, userId) => {
+    const response = await axios.post(
+        "avaliacao/upvote",
+        {
+            avaliacaoId,
+            userId
+        }
+    );
+
+    if(response.status !== 200) {
+        throw new Error("Couldn't upvote review.");
+    }
+}
+export const downvoteReview = async (avaliacaoId, userId) => {
+    const response = await axios.post(
+        "avaliacao/downvote",
+        {
+            avaliacaoId,
+            userId
+        }
+    );
+
+    if(response.status !== 200) {
+        throw new Error("Couldn't downvote review.");
+    }
+}
+

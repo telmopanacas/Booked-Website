@@ -13,6 +13,7 @@ const HomePage = ({searchResults}) => {
 
     const { reviews, isPending, error } = useAllReviews();
     const { auth } = useAuth();
+
     return ( 
         <div className="home-page">
             { auth?.authenticated 

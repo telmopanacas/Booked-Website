@@ -1,4 +1,5 @@
 import axios from "axios";
+import getCurrentUserEmail from "../utils/getCurrentUserEmail";
 
 export const getUserDetails = async (email) => {
 
@@ -39,4 +40,41 @@ export const getUserDownvotedReviews = async(userId) => {
 
     const downvotedReviews = response.data;
     return downvotedReviews;
+}
+
+export const setUserIdUpvotedDownvotedReviews = async (setUserId, setUserDownvotedReviews, setUserUpvotedReviews) => {
+    //1. Fetch userDetails
+    getUserDetails(getCurrentUserEmail())
+    .then((userDetails) => {
+        const tempUserId = userDetails["id"];
+        //2. With userDetails, set userId in AuthContext
+        setUserId(userDetails["id"]);  
+        
+        //3. With userId, fetch the user's upvoted and downvoted 
+        //   reviews and set them in AuthContext
+        getUserUpvotedReviews(tempUserId)
+        .then((upvotedReviews) => {
+            setUserUpvotedReviews(upvotedReviews);
+        })
+        .catch((error) => {
+            throw new Error(error.message);
+        });
+
+        getUserDownvotedReviews(tempUserId)
+        .then((downvotedReviews) => {
+            setUserDownvotedReviews(downvotedReviews);
+        })
+        .catch((error) => {
+            throw new Error(error.message);
+        });
+    })
+    .catch((error) => {
+        throw new Error(error.message);
+    });
+}
+
+export const resetUserIdUpvotedDownvotedReviews = (setUserId, setUserDownvotedReviews, setUserUpvotedReviews) => {
+    setUserId(null);
+    setUserDownvotedReviews([]);
+    setUserUpvotedReviews([]);
 }

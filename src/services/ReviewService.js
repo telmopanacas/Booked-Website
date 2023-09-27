@@ -97,14 +97,30 @@ export const searchReview = async (searchInput) => {
     return data;
 }
 
-export const updateReviewVotes = async (reviewId, votes) => {
-    const query = `votos=${votes}`;
+export const upvoteReview = async (avaliacaoId, userId) => {
+    const response = await axios.post(
+        "avaliacao/upvote",
+        {
+            avaliacaoId,
+            userId
+        }
+    );
 
-    const response = await axios.put(`avaliacao/${reviewId}?${query}`);
-
-    if ( response.status !== 200 ) {
-        throw new Error("Error upvoting review.");
+    if(response.status !== 200) {
+        throw new Error("Couldn't upvote review.");
     }
+}
+export const downvoteReview = async (avaliacaoId, userId) => {
+    const response = await axios.post(
+        "avaliacao/downvote",
+        {
+            avaliacaoId,
+            userId
+        }
+    );
 
+    if(response.status !== 200) {
+        throw new Error("Couldn't downvote review.");
+    }
 }
 

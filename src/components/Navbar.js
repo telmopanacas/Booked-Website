@@ -5,10 +5,11 @@ import useAuth from '../hooks/useAuth';
 import { signout } from '../services/AuthenticationService';
 import { toast } from 'sonner';
 import { searchReview } from '../services/ReviewService';
+import { resetUserIdUpvotedDownvotedReviews } from '../services/UserService';
 
 
 const Navbar = ({setSearchResults}) => {
-    const { auth , setAuth} = useAuth();
+    const { auth , setAuth, setUserId, setUserDownvotedReviews, setUserUpvotedReviews} = useAuth();
     const navigate = useNavigate();
     const inputRef = useRef(null);
 
@@ -17,10 +18,11 @@ const Navbar = ({setSearchResults}) => {
     }
 
     const handleSignOutClick = () => {
-        setAuth({authenticated: false});
         toast.promise(signout(), {
             loading: "Signing out...",
             success: () => {
+                setAuth({authenticated: false});
+                resetUserIdUpvotedDownvotedReviews(setUserId, setUserDownvotedReviews, setUserUpvotedReviews);
                 navigate("/signin");
                 return "Signed out successfully!"
             },

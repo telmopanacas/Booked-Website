@@ -3,9 +3,10 @@ import getCurrentTime from '../utils/getCurrentTime.js'
 import getCurrentDate from '../utils/getCurrentDate.js'
 import { FaArrowUp, FaArrowDown } from "react-icons/fa6"
 import { useState } from 'react'
-import { updateReviewVotes } from '../services/ReviewService'
+import { downvoteReview, updateReviewVotes, upvoteReview } from '../services/ReviewService'
 import { toast } from 'sonner'
 import useAuth from '../hooks/useAuth'
+import arrayContainsInt from '../utils/arrayContainsInt';
 
 
 
@@ -86,7 +87,7 @@ const RatingStars = ({ rating }) => {
 
 
 const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, review, date, time, votes }) => {
-    const { userId, userUpvotedReviews, userDownvotedReviews } = useAuth();
+    const { auth, userId, userUpvotedReviews, userDownvotedReviews, setUserUpvotedReviews, setUserDownvotedReviews } = useAuth();
     const displayPostTitle = postTitle !== '' ? postTitle : 'Post title';
     const displayBookTitle = bookTitle !== '' ? bookTitle : 'Book title';
     const displayBookAuthor= bookAuthor !== '' ? bookAuthor : 'Book author';
@@ -99,34 +100,82 @@ const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, 
     const [displayedVotes, setDisplayedVotes] = useState(votes);
 
     const handleUpvote = () => {
-        // To prevent from being used in the Create Review page
-        if ( postId !== undefined ) {
-            
-            updateReviewVotes(postId, displayedVotes+1)
-            .then(() => {
-                toast.success("Review upvoted!");
-                setDisplayedVotes(displayedVotes+1);
-            })
-            .catch((error) => {
-                toast.error(error.message);
-            });
-            
+        if(!auth?.authenticated) {
+            toast.error("Sign in to upvote / downvote reviews.");
+        }else {
+            // To prevent from being used in the Create Review page
+            if ( postId !== undefined ) {
+                if (userUpvotedReviews.includes(postId)) {
+                    setUserUpvotedReviews(userUpvotedReviews.filter(id => id !== postId));
+                    
+                    // Make request to endpoint /upvote
+                    upvoteReview(postId, userId)
+                    .then(() => {
+                        toast.success("Review upvote removed!");
+                        setDisplayedVotes(displayedVotes-1);
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
+                } else {
+                    // Update upvoted reviews
+                    setUserUpvotedReviews([...userUpvotedReviews, postId]);
+                    
+                    // Update downvoted reviews
+                    setUserDownvotedReviews(userDownvotedReviews.filter(id => id !== postId));
+                    
+                    // Make request to endpoint /upvote
+                    upvoteReview(postId, userId)
+                    .then(() => {
+                        toast.success("Review upvoted!");
+                        setDisplayedVotes(displayedVotes+1);
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
+                }
+                
+            }
         }
         
     }
 
     const handleDownvote = () => {
-        if ( postId !== undefined) {
-            
-            updateReviewVotes(postId, displayedVotes-1)
-            .then(() => {
-                toast.success("Review downvoted!");
-                setDisplayedVotes(displayedVotes-1);
-            })
-            .catch((error) => {
-                toast.error(error.message);
-            });
-            
+        if(!auth?.authenticated) {
+            toast.error("Sign in to upvote / downvote reviews.");
+        } else {
+            // To prevent from being used in the Create Review page
+            if ( postId !== undefined) {
+                if (userDownvotedReviews.includes(postId)) {
+                    setUserDownvotedReviews(userDownvotedReviews.filter(id => id !== postId));
+                    
+                    // Make request to endpoint /downvote
+                    downvoteReview(postId, userId)
+                    .then(() => {
+                        toast.success("Review downvote removed.");
+                        setDisplayedVotes(displayedVotes+1);
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
+                } else {
+                    // Update downvoted reviews
+                    setUserDownvotedReviews([...userDownvotedReviews, postId]);
+
+                    // Update upvoted reviews
+                    setUserUpvotedReviews(userUpvotedReviews.filter(id => id !== postId));
+                    
+                    // Make request to endpoint /downvote
+                    downvoteReview(postId, userId)
+                    .then(() => {
+                        toast.success("Review downvoted.");
+                        setDisplayedVotes(displayedVotes-1);
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
+                }
+            }
         }
     }
 
@@ -148,9 +197,15 @@ const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, 
                     </div>
                     <div className="bottom">
                         <div className='votes'>
-                            <FaArrowUp onClick={handleUpvote}/>
+                            <FaArrowUp 
+                                onClick={handleUpvote}
+                                style={{color: arrayContainsInt(userUpvotedReviews, postId) ? '#34A38F' : ''}}
+                            />
                             { displayedVotes }
-                            <FaArrowDown onClick={handleDownvote} style={{color: userDownvotedReviews.includes(postId) ? '#0000FF': ''}}/>
+                            <FaArrowDown
+                                onClick={handleDownvote}
+                                style={{color: arrayContainsInt(userDownvotedReviews, postId) ? '#ff4c4c' : ''}}
+                            />
                         </div>
                         <div className="post-author">
                             <p>By: { displayUsername } <span>{ displayDate }</span></p>

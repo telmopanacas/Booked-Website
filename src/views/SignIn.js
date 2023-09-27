@@ -6,9 +6,10 @@ import { authenticate, register } from '../services/AuthenticationService';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { toast } from 'sonner'
+import { setUserIdUpvotedDownvotedReviews } from '../services/UserService';
 
 const SignInForm = ({ setIsAMember }) => {
-    const { setAuth } = useAuth();
+    const { setAuth, setUserId, setUserDownvotedReviews, setUserUpvotedReviews } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/home";
@@ -32,6 +33,10 @@ const SignInForm = ({ setIsAMember }) => {
             success: () => {
                 setIsPending(false);
                 setAuth({authenticated: true})
+                setUserIdUpvotedDownvotedReviews(setUserId, setUserDownvotedReviews, setUserUpvotedReviews)
+                .catch((error) => {
+                    throw new Error(error.message);
+                });
                 navigate(from , { replace: true });
                 return "Signed in successfully!";
             },

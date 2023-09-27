@@ -31,13 +31,57 @@ Guide for writing change logs.
 - [ ] Integrate Open Libary API or something similar to validate books.
 
 
-- [ ] Implement votes on reviews. ( **In progress** )
+- [x] ~~Implement votes on reviews. ( **Finished** )~~
 
 
 - [ ] Implement comments on reviews.
 
 
 - [x] ~~Implement the search functionality.~~ ( **Finished** )
+
+
+- [ ] Make the layout responsive.
+
+## 2023-09-27
+
+### Added
+- Added a utility function `arrayContainsInt` that receives an array of integers and a integer and returns if the array contains said integer.
+
+### Changed
+- The `AuthProvider` now contains the states for the `userId`, `userUpvotesReviews` and `userDownvotedReviews`.
+
+
+- Added the function `setUserIdUpvotedDownvotedReviews` to the `UserService` file that fetches the user's id, his upvoted reviews and downvoted reviews and changed the states of those variables in the `AuthContext`.
+
+
+- Added the function `resetUserIdUpvotedDownvotedReviews` to the `UserService` file that resets the states of the `userId`, `userUpvotesReviews` and `userDownvotedReviews`.
+
+
+- In the `Root` file if the user **is authenticated** the function `setUserIdUpvotedDownvotedReviews` is called to make the respective API requests and change the respective states.
+
+
+- In the `ReviewService` the `updateReviewVotes` was removed and substituted by `upvoteReview` and `downvoteReview`.
+
+
+- In the `PostCard` component both the `handleUpvote` and `handleDownvote` were overhauled to mantain consistency between the local state and the database.
+
+
+- In the `PostCard` component now the color of the upvote and downvote icons depends if the user upvoted / downvoted the review.
+
+
+- In the `SignIn` page now if the user successfully signs in the function `setUserIdUpvotedDownvotedReviews` is called to change the state of the application.
+
+
+- In the `Navbar` component now if the user successfully signs out the function `resetUserIdUpvotedDownvotedReviews` is called to reset the state of the application.
+
+### Deprecated
+- N/A.
+
+### Removed
+- N/A.
+
+### Fixed
+- N/A.
 
 ## 2023-09-22
 

@@ -42,6 +42,9 @@ Guide for writing change logs.
 
 - [ ] Make the layout responsive.
 
+
+- [ ] Problem with review card when creating said review.
+
 ## 2023-09-27
 
 ### Added

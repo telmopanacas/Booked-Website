@@ -1,9 +1,9 @@
 import '../assets/styles/PostCard.css'
 import getCurrentTime from '../utils/getCurrentTime.js'
 import getCurrentDate from '../utils/getCurrentDate.js'
-import { FaArrowUp, FaArrowDown } from "react-icons/fa6"
+import { FaDownLong, FaUpLong } from "react-icons/fa6"
 import { useState } from 'react'
-import { downvoteReview, updateReviewVotes, upvoteReview } from '../services/ReviewService'
+import { downvoteReview, upvoteReview } from '../services/ReviewService'
 import { toast } from 'sonner'
 import useAuth from '../hooks/useAuth'
 import arrayContainsInt from '../utils/arrayContainsInt';
@@ -11,7 +11,7 @@ import arrayContainsInt from '../utils/arrayContainsInt';
 
 
 const RatingStars = ({ rating }) => {
-    if(rating === 1) {
+    if(rating == 1) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -25,7 +25,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating === 2) {
+    if(rating == 2) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -39,7 +39,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating === 3) {
+    if(rating == 3) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -53,7 +53,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating === 4) {
+    if(rating == 4) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -67,7 +67,7 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    if(rating === 5) {
+    if(rating == 5) {
         return (
             <div className="rating-box">
                 <div className="stars">
@@ -81,8 +81,6 @@ const RatingStars = ({ rating }) => {
             </div>
         );
     }
-    
-    
 }
 
 
@@ -197,12 +195,12 @@ const PostCard = ({ postId, postTitle, bookTitle, bookAuthor, username, rating, 
                     </div>
                     <div className="bottom">
                         <div className='votes'>
-                            <FaArrowUp 
+                            <FaUpLong 
                                 onClick={handleUpvote}
                                 style={{color: arrayContainsInt(userUpvotedReviews, postId) ? '#34A38F' : ''}}
                             />
                             { displayedVotes }
-                            <FaArrowDown
+                            <FaDownLong
                                 onClick={handleDownvote}
                                 style={{color: arrayContainsInt(userDownvotedReviews, postId) ? '#ff4c4c' : ''}}
                             />

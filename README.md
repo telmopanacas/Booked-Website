@@ -42,6 +42,29 @@ Guide for writing change logs.
 
 - [ ] Make the layout responsive.
 
+
+## 2023-10-13
+
+### Added
+- N/A.
+
+
+### Changed
+- In the `PostCard` component changed the upvote and downvote arrows icons.
+
+
+### Deprecated
+- N/A.
+
+
+### Removed
+- N/A.
+
+
+### Fixed
+- When creating a review, if the user changed the rating value the `RatingStars` component would disapear because of the `if` statement using `===`, so it was changed to `==`.
+
+
 ## 2023-09-27
 
 ### Added

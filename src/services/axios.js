@@ -1,9 +1,9 @@
 import axios from "axios";
 // Dev
-//axios.defaults.baseURL = "http://localhost:8080/api/v1/";
+axios.defaults.baseURL = "http://localhost:8080/api/v1/";
 
 // Prod
-axios.defaults.baseURL = "https://sea-turtle-app-hwycl.ondigitalocean.app/api/v1/";
+//axios.defaults.baseURL = "https://sea-turtle-app-hwycl.ondigitalocean.app/api/v1/";
 
 axios.defaults.withCredentials = true
 let refresh = false;

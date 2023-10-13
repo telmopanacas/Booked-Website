@@ -1,10 +1,13 @@
 .about-page {
     display: flex;
-    align-items: center;;
+    align-items: center;
+    justify-content: center;
     /*
     padding: top right bottom left
-    */
     padding: 70px 50px;
+    */
+    padding: 70px 50px 0px 50px;
+    
 }
 .image-side {
     flex:2;
@@ -44,3 +47,9 @@
 }
 
 
+@media all and (max-width: 1366px) {
+    .image {
+        width: 300px;
+        height: 455px;
+    }
+}

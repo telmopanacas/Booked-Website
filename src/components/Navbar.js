@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../assets/styles/Navbar.css'
 import useAuth from '../hooks/useAuth';
@@ -12,6 +12,13 @@ const Navbar = ({setSearchResults}) => {
     const { auth , setAuth, setUserId, setUserDownvotedReviews, setUserUpvotedReviews} = useAuth();
     const navigate = useNavigate();
     const inputRef = useRef(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        //Its done this way to prevent mass clicking malfunctions
+        setIsMenuOpen((open) => !open);
+    }
+
 
     const handleLogoClink = () => {
         navigate('/home');
@@ -76,6 +83,19 @@ const Navbar = ({setSearchResults}) => {
                     <Link to='/signin'>Sign In</Link>
                 }
             </div>
+
+            <li className='ham-menu-trigger' onClick={toggleMenu}>trigger</li>
+            <div className={`ham-menu${isMenuOpen ? "-isOpen" : ""}`}>
+                <Link to='/home'>Home</Link>
+                <Link to='/about'>About</Link>
+                <Link to='/contact'>Contact</Link>
+                { auth?.authenticated ?
+                    <Link onClick={handleSignOutClick}>Sign Out</Link>
+                    :
+                    <Link to='/signin'>Sign In</Link>
+                }
+            </div>
+            
         </nav>
     );
 }
